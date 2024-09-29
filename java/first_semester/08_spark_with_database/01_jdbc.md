@@ -38,4 +38,4 @@ JDBC (Java Database Connectivity) — это стандарт, который п
    СУБД.
 2. Программисты могут свободно менять конечную СУБД, не меняя при этом кода приложения.
 
-> Подобный подход напоминает принцип [Dependency Inversion](../03_unit_tests_gof_and_solid/05_solid.md) из SOLID.
+> Подобный подход напоминает принцип [Dependency Inversion](../04_unit_tests_gof_and_solid/05_solid.md) из SOLID.
