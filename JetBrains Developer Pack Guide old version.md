@@ -1,5 +1,7 @@
 # Шаги
 
+# DEPRECATED (Это старый алгоримт получения лицензии, который блокирует JetBrains c 2025-го года)
+
 1. Привязываем к аккаунту своей IDE (в нашем случае JetBrains-аккаунт) свой GitHub-аккаунт (если нет двухфакторной аутентификации в GitHub, то активируем её)
 2. Добавляем почту физтеха к аккаунту в GitHub через вкладку Settings -> email (необязательно её делать главной (primary) почтой)
 3. В GitHub на своей странице профиля нажимаем кнопку "edit profile" -> в поле "Name" записываем фамилию, имя и отчество
@@ -16,5 +18,3 @@
    ![image](https://github.com/user-attachments/assets/960bbef3-bc95-4a87-b056-6e04efc412fc)
    ![eda28774-2b44-4533-8a23-51815146f265](https://github.com/user-attachments/assets/a18f4e4b-1ac2-4c0c-9386-6a0a97f05f15)
    ![9220cf2b-5976-4d22-adc6-b4ea4f8e49b7](https://github.com/user-attachments/assets/a5453a99-2ec4-49ec-b550-e4a365488d99)
-
-DEPRECATED (Это старый алгоримт получения лицензии, который блокирует JetBrains c 2025-го года)
