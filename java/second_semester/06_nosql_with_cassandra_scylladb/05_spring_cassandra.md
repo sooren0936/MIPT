@@ -63,42 +63,27 @@ spring:
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-@Table("users")
+@Getter
+@Setter
+@Table(value = "users")
 public class User {
 
-    @PrimaryKey
-    private String id;
+    @PrimaryKeyColumn(name = "user_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
+    private String user_id;
+
+    @PrimaryKeyColumn(name = "name", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
     private String name;
+
+    @CassandraType(type = CassandraType.Name.TEXT, typeArguments = CassandraType.Name.TEXT)
+    @PrimaryKeyColumn(name = "namespace", ordinal = 2, type = PrimaryKeyType.CLUSTERED)
+    private Namespace namespace;
+    
+    @Column(value = "email")
     private String email;
-
-    // Геттеры и сеттеры
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
 ```
 
-В этом примере мы используем аннотацию `@Table` для указания имени таблицы и `@PrimaryKey` для указания первичного ключа.
+В этом примере мы используем аннотацию `@Table` для указания имени таблицы и `@PrimaryKeyColumn` для указания первичного ключа.
 
 #### Использование CassandraTemplate
 
@@ -154,8 +139,8 @@ import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 
 public interface UserRepository extends CassandraRepository<User, String> {
-    @Query("SELECT * FROM users WHERE name = ?0 ALLOW FILTERING")
-    List<User> findByName(String name);
+    @Query("SELECT * FROM users WHERE user_id = ? AND name = ?")
+    List<User> findByUserIdAndName(String id, String name);
 }
 ```
 
