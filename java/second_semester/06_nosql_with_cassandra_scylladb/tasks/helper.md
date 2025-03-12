@@ -4,12 +4,12 @@
 
 - **Partition Key**: Должен равномерно распределять данные по узлам. В случае аудита пользователей, хорошим выбором
   может быть `user_id`.
-- **Clustering Key**: Используется для сортировки данных внутри партиции. В случае аудита, это может быть `event_time`.
+- **Clustering Key**: Используется для сортировки данных внутри партиции. В случае аудита это может быть `event_time`.
 
 ```sql
 CREATE TABLE my_keyspace.user_audit (
     user_id UUID,               -- Идентификатор пользователя (данные будут распределены по юзерам)
-    event_time TIMESTAMP,       -- Время события (испольщуется для уникальности так и для сортировки)
+    event_time TIMESTAMP,       -- Время события (используется для уникальности так и для сортировки)
     event_type TEXT,            -- Тип события (например, "INSERT", "DELETE")
     event_details TEXT,         -- Детали события
     PRIMARY KEY ((user_id), event_time)
@@ -55,7 +55,5 @@ public class UserAuditService {
         // Выполнение запроса
         session.execute(boundStatement);
     }
-    
- 
 }
 ```
