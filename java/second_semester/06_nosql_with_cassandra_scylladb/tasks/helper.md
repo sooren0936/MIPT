@@ -33,9 +33,9 @@ public class UserAuditService {
     @Autowired
     private CqlSession session;
 
-      enum Action {
+    enum Action {
         SELECT, UPDATE, INSERT, DELETE, DROPPED_DATABASE
-      }
+    }
 
     public void insertUserAction() {
         // Подготовка запроса
