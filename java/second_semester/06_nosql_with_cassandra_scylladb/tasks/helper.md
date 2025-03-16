@@ -121,3 +121,19 @@ spring.data.cassandra.local-datacenter=datacenter1
 ```
 
 ---
+
+---
+
+
+#### Типовая ОШИБКА - забыть забиндить порт контейнера с портом бд
+
+![Missed port property](img/missed_port_property.png)
+
+```java
+    @BeforeAll
+    static void setupCassandraConnectionProperties() {
+        System.setProperty("spring.cassandra.port", String.valueOf(cassandraContainer.getMappedPort(9042)));
+    }
+```
+
+---
