@@ -113,7 +113,7 @@ import org.springframework.test.context.TestPropertySource;
     "spring.data.cassandra.contact-points=127.0.0.1",
     "spring.data.cassandra.port=9042",
     "spring.data.cassandra.keyspace-name=test_keyspace",
-    "spring.data.cassandra.local-datacenter=datacenter1"
+    "spring.data.cassandra.local-datacenter=datacenter1" // переименовывать не нужно, значение datacenter1 используется для тестов
 })
 public class UserRepositoryIntegrationTest {
 
