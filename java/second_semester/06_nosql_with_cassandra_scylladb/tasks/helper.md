@@ -137,3 +137,43 @@ spring.data.cassandra.local-datacenter=datacenter1
 ```
 
 ---
+
+#### Типовая ПРОБЛЕМА - Could not reach any contact point
+
+Обычно показывается верхне уровневая ошибка:
+
+![Could not reach any contact point](img/could_not_reach_any_contact_point.png)
+
+А за ней может быть проблема, что за 2 секунды (PT2S) сервис не может установить соединение до касандры и отсюда и проблема
+
+
+![Query timed out after PT2S](img/query_timed_out_after.png)
+
+Пример решения проблемы через увеличения в конфиге драйвера время timeout'ов
+
+```java
+import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
+import com.datastax.oss.driver.api.core.config.ProgrammaticDriverConfigLoaderBuilder;
+import org.springframework.boot.autoconfigure.cassandra.DriverConfigLoaderBuilderCustomizer;
+import org.springframework.stereotype.Component;
+
+import java.time.Duration;
+
+@Component
+public class CassandraDriverConfigLoaderBuilderCustomizer implements DriverConfigLoaderBuilderCustomizer {
+
+  @Override
+  public void customize(ProgrammaticDriverConfigLoaderBuilder programmaticDriverConfigLoaderBuilder) {
+    programmaticDriverConfigLoaderBuilder
+            .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(10))
+            .withDuration(DefaultDriverOption.CONNECTION_CONNECT_TIMEOUT, Duration.ofSeconds(10))
+            .withDuration(DefaultDriverOption.CONNECTION_INIT_QUERY_TIMEOUT, Duration.ofSeconds(10));
+  }
+}
+```
+
+---
+
+
+
+
