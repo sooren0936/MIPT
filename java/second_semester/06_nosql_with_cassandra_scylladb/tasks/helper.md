@@ -127,7 +127,7 @@ spring.data.cassandra.local-datacenter=datacenter1
 
 #### Типовая ОШИБКА - забыть забиндить порт контейнера с портом бд
 
-![Missed port property](img/missed_port_property.png)
+<img alt="Missed port property" height="200" src="img/missed_port_property.png" width="350"/>
 
 ```java
     @BeforeAll
@@ -146,10 +146,9 @@ spring.data.cassandra.local-datacenter=datacenter1
 
 А за ней может быть проблема, что за 2 секунды (PT2S) сервис не может установить соединение до касандры и отсюда и проблема
 
+<img alt="Query timed out after PT2S" height="300" src="img/query_timed_out_after.png" width="700"/>
 
-![Query timed out after PT2S](img/query_timed_out_after.png)
-
-Пример решения проблемы через увеличения в конфиге драйвера время timeout'ов
+Пример решения проблемы через увеличения в конфиге драйвера время timeout'ов:
 
 ```java
 import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
