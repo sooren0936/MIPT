@@ -144,11 +144,11 @@ spring.data.cassandra.local-datacenter=datacenter1
 
 ![Could not reach any contact point](img/could_not_reach_any_contact_point.png)
 
-А за ней может быть проблема, что за 2 секунды (PT2S) сервис не может установить соединение до касандры и отсюда и проблема
+А за ней может быть проблема, что за 2 секунды (PT2S) сервис не может установить соединение до касандры и отсюда и ошибка
 
 <img alt="Query timed out after PT2S" height="300" src="img/query_timed_out_after.png" width="700"/>
 
-Пример решения проблемы через увеличения в конфиге драйвера время timeout'ов:
+Пример решения проблемы через увеличения в конфиге драйвера времени timeout'ов:
 
 ```java
 import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
