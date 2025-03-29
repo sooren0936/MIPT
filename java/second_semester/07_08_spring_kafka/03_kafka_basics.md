@@ -115,7 +115,7 @@ public class KafkaConsumerService {
    private final ObjectMapper objectMapper;
 
    @KafkaListener(topics = {"${topic-to-consume-message}"})
-   public void processCookieMatching(String message) {
+   public void consumeMessage(String message) {
       DtoMessage parsedMessage = objectMapper.readValue(message, DtoMessage.class);
       LOGGER.info("Retrieved message {}", message);
    }
@@ -185,14 +185,14 @@ spring.kafka.listener.ack-mode=manual_immediate
 ```java
 
 @Service
-public class LicenseValidateConsumer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LicenseValidateConsumer.class);
+public class KafkaConsumerService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerService.class);
 
     private final ObjectMapper objectMapper;
 
     @KafkaListener(topics = {"${topic-to-consume-message}"})
-    public void processCookieMatching(String message, Acknowledgment acknowledgment) {
-        ValidateCourseMessage parsedMessage = objectMapper.readValue(message, ValidateCourseMessage.class);
+    public void consumeMessage(String message, Acknowledgment acknowledgment) {
+        DtoMessage parsedMessage = objectMapper.readValue(message, DtoMessage.class);
         LOGGER.info("Retrieved message {}", message);
         acknowledgment.acknowledge();
     }
@@ -213,31 +213,16 @@ Offset «закоммитится» только после вызова `acknow
 Посмотрите снова на пример producer ниже:
 
 ```java
-
-@Service
-public class KafkaProducerService {
-   private final KafkaTemplate<String, String> kafkaTemplate;
-   private final ObjectMapper objectMapper;
-   private final String topic;
-
-   public KafkaProducerService(KafkaTemplate<String, String> kafkaTemplate,
-                               ObjectMapper objectMapper,
-                               @Value("{topic-to-send-message}") String topic) {
-      this.kafkaTemplate = kafkaTemplate;
-      this.objectMapper = objectMapper;
-      this.topic = topic;
-   }
+    ...
 
    public void sendMessage(DtoMessage dtoMessage) {
       String message = objectMapper.writeValueAsString(dtoMessage);
-
-      // Kafka Producer отправляет сообщения также асинхронно, подробнее об этом далее в модуле
       CompletableFuture<SendResult<String, String>> sendResult = kafkaTemplate.send(topic, message);
    }
 }
 ```
 
-Дело в том, что вызов `KafkaTemplate.send` не отправляет сообщения сразу же. Вместо этого они
+Дело в том, что вызов `kafkaTemplate.send` не отправляет сообщения сразу же. Вместо этого они
 добавляются в буфер, который хранится в памяти процесса, и отправляет его целиком в Kafka позже.
 
 > Подробнее о размере этого буфера и частоты его проверки
