@@ -79,6 +79,12 @@ public void registerTimeMetrics(double requestTime, String exceptionName) {
 }
 ```
 
+```text
+your_custom_requests_seconds{quantile="0.5"}
+your_custom_requests_seconds{quantile="0.75"}
+your_custom_requests_seconds{quantile="0.95"}
+your_custom_requests_seconds{quantile="0.99"}
+```
 
 ### **1.4. Heatmap**
 
@@ -94,8 +100,23 @@ public void registerTimeMetrics(double requestTime, String exceptionName) {
 ```
 
 ```text
-sum(
-        rate(your_custom_requests_seconds_bucket{}
+histogram_quantile(0.5,
+                   rate(netty_custom_server_requests_seconds_bucket{}
+[$__rate_interval]))
+by (le))
+
+histogram_quantile(0.75,
+                   rate(netty_custom_server_requests_seconds_bucket{}
+[$__rate_interval]))
+by (le))
+
+histogram_quantile(0.95,
+                   rate(netty_custom_server_requests_seconds_bucket{}
+[$__rate_interval]))
+by (le))
+
+histogram_quantile(0.99,
+                   rate(netty_custom_server_requests_seconds_bucket{}
 [$__rate_interval]))
 by (le))
 ```
