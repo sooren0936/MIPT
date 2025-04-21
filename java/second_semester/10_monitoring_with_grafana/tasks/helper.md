@@ -80,26 +80,6 @@ public void registerTimeMetrics(double requestTime, String exceptionName) {
 ```
 
 ```text
-your_custom_requests_seconds{quantile="0.5"}
-your_custom_requests_seconds{quantile="0.75"}
-your_custom_requests_seconds{quantile="0.95"}
-your_custom_requests_seconds{quantile="0.99"}
-```
-
-### **1.4. Heatmap**
-
-Для построения тепловой карты используется хистограмма и идущие вместе с ней бакеты
-
-```java
-public void registerTimeMetrics(double requestTime, String exceptionName) {
-    DistributionSummary
-            ...
-            .serviceLevelObjectives(10, 50, 100, 200, 300, 400, 500, 1000, 10000)
-            ...
-}
-```
-
-```text
 histogram_quantile(0.5,
                    rate(netty_custom_server_requests_seconds_bucket{}
 [$__rate_interval]))
@@ -117,6 +97,26 @@ by (le))
 
 histogram_quantile(0.99,
                    rate(netty_custom_server_requests_seconds_bucket{}
+[$__rate_interval]))
+by (le))
+```
+
+### **1.4. Heatmap**
+
+Для построения тепловой карты используется хистограмма и идущие вместе с ней бакеты
+
+```java
+public void registerTimeMetrics(double requestTime, String exceptionName) {
+    DistributionSummary
+            ...
+            .serviceLevelObjectives(10, 50, 100, 200, 300, 400, 500, 1000, 10000)
+            ...
+}
+```
+
+```text
+sum(
+        rate(your_custom_requests_seconds_bucket{}
 [$__rate_interval]))
 by (le))
 ```
