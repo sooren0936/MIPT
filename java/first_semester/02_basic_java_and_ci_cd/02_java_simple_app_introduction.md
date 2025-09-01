@@ -30,7 +30,7 @@ Edition по [этой ссылке](https://www.jetbrains.com/products/compare/
 > Про Maven и другие сборщики Java-проектов читайте дальше по курсу
 
 > В окне вам также предложат указать версию Java SDK. По умолчанию она устанавливается вместе с IDE.
-> Если этого не произошло, то скачайте [Java 17 по этой ссылке](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+> Если этого не произошло, то скачайте [Java 21 по этой ссылке](https://www.oracle.com/java/technologies/downloads/#java21).
 
 Далее выберите названия проекта, путь и нажмите кнопку `Create`.
 
