@@ -1,3 +1,12 @@
+Данный гайд является попыткой получения студенческой лицензии IntelliJ Idea Ultimate
+Он не является 100%-ым рабочим вариантом, поэтому скорее всего не у всех он заработает, но попробовать можно
+Так же можно воспользоваться альтернативами такими как:
+ - IntelliJ community edition бесплатная версия идеи https://www.jetbrains.com/idea/download/?section=windows
+ - Giga Ide от сбера на базе IntelliJ CE http://gitverse.ru/features/gigaide/
+ - Open Idea на базе IntelliJ CE https://openide.ru
+ - Visual studio code https://code.visualstudio.com/
+
+
 # Шаги
 
 1. Привязываем к аккаунту своей IDE (в нашем случае JetBrains-аккаунт) свой GitHub-аккаунт (если нет двухфакторной аутентификации в GitHub, то активируем её)
