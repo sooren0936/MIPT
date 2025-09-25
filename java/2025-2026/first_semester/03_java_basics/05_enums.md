@@ -165,7 +165,7 @@ public class Airplane {
     private final int year;
     private final Color color;
 
-    public Airplane(int year, String color) {
+    public Airplane(int year, Color color) {
         this.year = year;
         this.color = color;
     }
